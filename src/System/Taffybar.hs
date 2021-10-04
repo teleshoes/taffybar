@@ -145,8 +145,12 @@ import           Paths_taffybar ( getDataDir )
 -- | The parameters that are passed to Dyre when taffybar is invoked with
 -- 'dyreTaffybar'.
 taffybarDyreParams =
-  (Dyre.newParams "taffybar" dyreTaffybarMain showError)
-  { Dyre.ghcOpts = ["-threaded", "-rtsopts"]
+  Dyre.defaultParams
+  { Dyre.projectName = "taffybar"
+  , Dyre.realMain = dyreTaffybarMain
+  , Dyre.showError = showError
+
+  , Dyre.ghcOpts = ["-threaded", "-rtsopts"]
   , Dyre.rtsOptsHandling = Dyre.RTSAppend ["-I0", "-V0"]
   }
 
