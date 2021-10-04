@@ -162,7 +162,7 @@ vFillCenter widget =
 pixbufNewFromFileAtScaleByHeight :: Int32 -> String -> IO (Either String PB.Pixbuf)
 pixbufNewFromFileAtScaleByHeight height name =
   fmap (handleResult . first show) $ catchGErrorsAsLeft $
-  PB.pixbufNewFromFileAtScale name (-1) height True
+  fmap Just $ PB.pixbufNewFromFileAtScale name (-1) height True
   where
     handleResult = (maybe (Left "gdk function returned NULL") Right =<<)
 
